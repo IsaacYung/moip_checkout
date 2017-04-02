@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170402145924) do
   enable_extension "plpgsql"
 
   create_table "customers", force: :cascade do |t|
-    t.integer  "external_id"
+    t.string   "external_id"
     t.string   "fullname"
     t.string   "email"
     t.json     "phone"
@@ -27,14 +27,14 @@ ActiveRecord::Schema.define(version: 20170402145924) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "external_id"
+    t.string   "external_id"
     t.integer  "customers_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
 
   create_table "payments", force: :cascade do |t|
-    t.integer  "external_id"
+    t.string   "external_id"
     t.integer  "orders_id"
     t.string   "status"
     t.json     "amount"

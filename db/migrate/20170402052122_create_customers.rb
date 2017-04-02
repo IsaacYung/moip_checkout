@@ -1,7 +1,7 @@
 class CreateCustomers < ActiveRecord::Migration[5.0]
   def change
     create_table :customers do |t|
-      t.integer :external_id
+      t.string :external_id
       t.string :fullname
       t.string :email
       t.json :phone
