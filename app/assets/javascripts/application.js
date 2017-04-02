@@ -12,5 +12,27 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require turbolinks
 //= require_tree .
+
+//= require foundation.core
+//= require foundation.reveal
+//= require foundation.tabs
+//= require foundation.util.timerAndImageLoader
+//= require foundation.util.box
+//= require foundation.util.keyboard
+//= require foundation.util.mediaQuery
+//= require foundation.util.triggers
+//= require foundation.tooltip
+//= require foundation.equalizer
+//= require foundation.toggler
+//= require material-foundation/material-foundation
+//= require material-foundation/ripple
+//= require material-foundation/switches
+
+$(function() {
+  $(document).foundation();
+});
+
+$(function(){ $(document).foundation(); });
