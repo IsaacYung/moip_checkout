@@ -14,23 +14,28 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :product_name, class: "text-subhead" %>
+      <%= f.label "Nome do Produto", class: "text-subhead" %>
       <%= f.text_field :product_name %>
     </div>
 
     <div class="field">
-      <%= f.label :quantity, class: "text-subhead" %>
+      <%= f.label "Quantidade", class: "text-subhead" %>
       <%= f.number_field :quantity %>
     </div>
 
     <div class="field">
-      <%= f.label :detail, class: "text-subhead" %>
+      <%= f.label "Detalhe", class: "text-subhead" %>
       <%= f.text_field :detail %>
     </div>
 
     <div class="field">
-      <%= f.label :price, class: "text-subhead" %>
+      <%= f.label "Preço", class: "text-subhead" %>
       <%= f.number_field :price %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Foto", class: "text-subhead" %>
+      <%= f.text_field :pic %>
     </div>
 
     <div class="actions">

@@ -2,5 +2,7 @@
 
 <%= render 'form', product: @product %>
 
-<%= link_to 'Mostrar', @product, class: 'flat-button ink' %>
-<%= link_to 'Voltar', products_path, class: 'flat-button ink' %>
+<div class="row column">
+  <%= link_to 'Mostrar', @product, class: 'flat-button ink' %>
+  <%= link_to 'Voltar', products_path, class: 'flat-button ink' %>
+</div>
