@@ -1,2 +1,0 @@
-class ProductMoviment < ApplicationRecord
-end
