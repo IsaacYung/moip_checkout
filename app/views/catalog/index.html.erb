@@ -1,0 +1,27 @@
+<div class="row catalog columns">
+  <% @products.each do |item| %>
+    <div class="card medium-5 columns end" data-product-id="<%= item.id %>">
+      <div class="row">
+        <div class="medium-3 columns">
+          <% if item.pic %>
+            <%= image_tag "product/#{item.pic}" %>
+          <% end %>
+        </div>
+        <div class="medium-9 columns">
+          <ul class="no-bullet">
+            <li><h2 class="text-title"><%= item.product_name %></h2></li>
+            <li><%= item.detail %></li>
+            <li><%= item.quantity %></li>
+            <li><span class="text-headline"><%= BRL item.price %></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="">
+    <%= form_for :cart do |f| %>
+      <%= f.hidden_field :products %><br />
+      <%= f.submit 'Finalizar Compra', class: 'raised-button ink' %>
+    <% end %>
+  </div>
+</div>

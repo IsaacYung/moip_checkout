@@ -1,0 +1,16 @@
+@import "foundation_and_overrides";
+
+.top-bar .menu a {
+  font-weight: bold;
+}
+
+.catalog {
+  .card {
+    margin: $global-margin * 0.5;
+    cursor: pointer;
+  }
+
+  .active {
+    background-color: $primary-color;
+  }
+}

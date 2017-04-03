@@ -31,6 +31,8 @@
 //= require material-foundation/ripple
 //= require material-foundation/switches
 
+//= require json2
+
 $(function() {
   $(document).foundation();
 });
