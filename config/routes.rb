@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'checkout/custumer'
+  get 'checkout/customer'
+  post 'checkout/customer', to: 'checkout#customer_new'
 
   get 'checkout/payment'
 

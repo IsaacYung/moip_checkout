@@ -6,7 +6,7 @@ class CatalogController < ApplicationController
   def movement
     cookies[:cart] = cart_params.values
 
-    redirect_to :controller => 'checkout', :action => 'custumer'
+    redirect_to :controller => 'checkout', :action => 'customer'
   end
 
   def cart_params
