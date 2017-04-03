@@ -66,6 +66,8 @@ GEM
       sprockets-es6 (>= 0.9.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     i18n (0.8.1)
     jbuilder (2.6.3)
       activesupport (>= 3.0.0, < 5.2)
@@ -88,7 +90,11 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
+    moip2 (0.1.4)
+      httparty
+      recursive-open-struct
     multi_json (1.12.1)
+    multi_xml (0.6.0)
     nio4r (2.0.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
@@ -137,6 +143,7 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    recursive-open-struct (1.0.2)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -216,6 +223,7 @@ DEPENDENCIES
   jquery-rails
   json
   listen (~> 3.0.5)
+  moip2
   pg (~> 0.18)
   pry
   puma (~> 3.0)

@@ -11,11 +11,33 @@ class CheckoutController < ApplicationController
   end
 
   def customer_new
+    products_cart = cookies[:cart]
+    product_movements = JSON.parse products_cart
+
     customer = Customer.new(customer_params);
     customer.save
+
+    order = customer.orders.create()
+
+
+    product_movements.each do |item|
+      product = Product.find(item['product_id'])
+      order.product_movements.create(product_id: item['product_id'], quantity: item['quantity'], status: "SUSPENDED")
+      product.update(quantity: product.quantity - item['quantity'])
+    end
+
+    checkout = Checkout.new
+    order_response = checkout.create_order(order, customer)
+    order.update(external_id: order_response.id)
+    customer.update(external_id: order_response.customer.id)
+
+    redirect_to :controller=>'checkout',:action=>'payment'
   end
 
   def payment
+    checkout = Checkout.new
+    order = Order.last
+    @order_response = checkout.show_order(order.external_id)
   end
 
   def confirm
