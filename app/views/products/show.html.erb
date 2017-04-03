@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+<div class="column card">
+  <p class="text-subhead">
+    <strong>Nome do Produto:</strong>
+    <%= @product.product_name %>
+  </p>
+
+  <p class="text-subhead">
+    <strong>Quantidade:</strong>
+    <%= @product.quantity %>
+  </p>
+
+  <p class="text-subhead">
+    <strong>Detalhes:</strong>
+    <%= @product.detail %>
+  </p>
+
+  <p class="text-subhead">
+    <strong>Preço:</strong>
+    <%= @product.price %>
+  </p>
+
+  <p class="text-subhead">
+    <strong>Foto:</strong>
+    <%= @product.pic %>
+  </p>
+</div>
+
+<%= link_to 'Editar', edit_product_path(@product), class: 'flat-button ink' %>
+<%= link_to 'Voltar', products_path, class: 'flat-button ink' %>
