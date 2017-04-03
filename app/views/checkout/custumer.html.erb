@@ -1,2 +1,34 @@
-<h1>Checkout#custumer</h1>
-<p>Find me in app/views/checkout/custumer.html.erb</p>
+<div class="row columns products">
+  <h1>Identifique-se</h1>
+  <%= render 'form' %>
+  <div class="columns medium-6 card end">
+    <h3 class="text-center">Produtos</h3>
+    <% total_price = 0 %>
+    <% @products.each do |item| %>
+      <div class="columns end">
+        <div class="row">
+          <div class="columns">
+            <ul class="no-bullet inline-list row">
+              <li class="medium-9 columns"><span><%= item.product_name %></span></li>
+              <li class="medium-3 columns"><span>R$ <%= BRL item.price %></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <% total_price += item.price %>
+    <% end %>
+      <hr>
+      <div class="columns end">
+        <div class="row">
+          <div class="columns">
+            <ul class="no-bullet inline-list row">
+              <li class="medium-9 columns"><span>Total</span></li>
+              <li class="medium-3 columns"><span>R$ <%= BRL total_price %></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr>
+  </div>
+</div>

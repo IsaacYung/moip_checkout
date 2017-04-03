@@ -1,0 +1,33 @@
+
+<div class="columns medium-6 card end">
+  <%= form_for :customer do |f| %>
+    <div class="field">
+      <%= f.label "Nome Completo", class: "text-subhead" %>
+      <%= f.text_field :fullname %>
+    </div>
+
+    <div class="field">
+      <%= f.label "E-mail", class: "text-subhead" %>
+      <%= f.text_field :email %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Telefone", class: "text-subhead" %>
+      <%= f.text_field :phone %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Nascimento", class: "text-subhead" %>
+      <%= f.number_field :birth_date %>
+    </div>
+
+    <div class="field">
+      <%= f.label "CPF", class: "text-subhead" %>
+      <%= f.text_field :tax_document %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Salvar', class: 'raised-button ink' %>
+    </div>
+  <% end %>
+</div>
