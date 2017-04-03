@@ -28,14 +28,14 @@ ActiveRecord::Schema.define(version: 20170402145924) do
 
   create_table "orders", force: :cascade do |t|
     t.string   "external_id"
-    t.integer  "customers_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "customer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "payments", force: :cascade do |t|
     t.string   "external_id"
-    t.integer  "orders_id"
+    t.integer  "order_id"
     t.string   "status"
     t.json     "amount"
     t.integer  "instalment_count"
@@ -45,12 +45,12 @@ ActiveRecord::Schema.define(version: 20170402145924) do
   end
 
   create_table "product_movements", force: :cascade do |t|
-    t.integer  "products_id"
-    t.integer  "orders_id"
+    t.integer  "product_id"
+    t.integer  "order_id"
     t.integer  "quantity"
     t.string   "status"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade do |t|
