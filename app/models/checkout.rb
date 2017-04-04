@@ -39,4 +39,8 @@ class Checkout
   def show_order(order_id)
     @api.order.show(order_id)
   end
+
+  def create_payment(order)
+    @api.order.show(order_id)
+  end
 end

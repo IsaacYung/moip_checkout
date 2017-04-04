@@ -1,0 +1,54 @@
+
+<div class="columns end">
+  <%= form_for :payment do |f| %>
+    <div class="field">
+      <%= f.label "Número do Cartão", class: "text-subhead" %>
+      <%= f.number_field :card_number %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Mês", class: "text-subhead" %>
+      <%= f.number_field :expiration_month %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Ano", class: "text-subhead" %>
+      <%= f.number_field :expiration_year %>
+    </div>
+
+    <div class="field">
+      <%= f.label "CVC", class: "text-subhead" %>
+      <%= f.text_field :cvc %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Nome", class: "text-subhead" %>
+      <%= f.text_field :holder_name %>
+    </div>
+
+
+    <div class="field">
+      <%= f.label "Nascimento", class: "text-subhead" %>
+      <%= f.text_field :holder_birthdate %>
+    </div>
+
+    <div class="field">
+      <%= f.label "CPF", class: "text-subhead" %>
+      <%= f.text_field :cpf %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Telefone", class: "text-subhead" %>
+      <%= f.text_field :phone %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Parcelas (Max 12)", class: "text-subhead" %>
+      <%= f.number_field :instalment_count %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Salvar', class: 'raised-button ink' %>
+    </div>
+  <% end %>
+</div>

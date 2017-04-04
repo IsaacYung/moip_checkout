@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post 'checkout/customer', to: 'checkout#customer_new'
 
   get 'checkout/payment'
+  post 'checkout/payment', to: 'checkout#payment_new'
 
   get 'checkout/confirm'
 
