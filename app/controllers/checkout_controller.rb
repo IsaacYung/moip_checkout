@@ -45,30 +45,12 @@ class CheckoutController < ApplicationController
     order = Order.find(params[:order])
     payment = Payment.where(order_id: params[:order])
 
-    funding_instrument = {
-      method: "CREDIT_CARD",
-       credit_card: {
-       expiration_month: payment_params[:expiration_month],
-       expiration_year: payment_params[:expiration_year],
-       number: payment_params[:card_number],
-       cvc: payment_params[:cvc],
-         holder: {
-           fullname: payment_params[:holder_name],
-           birthdate: payment_params[:holder_birthdate],
-           tax_document: {
-             type: "CPF",
-             number: payment_params[:cpf]
-           },
-           phone: {
-               country_code: "55",
-               area_code: "11",
-               number: payment_params[:phone]
-           }
-         }
-       }
-    }
-
     payment.update(instalment_count: payment_params[:instalment_count], funding_instrument: "CREDIT_CARD")
+
+    checkout = Checkout.new
+    payment_response = checkout.create_payment(order, payment_params)
+
+    payment.update(external_id: payment_response.id, status: payment_response.status)
   end
 
   def confirm

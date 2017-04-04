@@ -40,7 +40,33 @@ class Checkout
     @api.order.show(order_id)
   end
 
-  def create_payment(order)
-    @api.order.show(order_id)
+  def create_payment(order, payment)
+    credit_card_payment = {
+      installment_count: payment[:instalment_count].to_i,
+      funding_instrument: {
+        method: "CREDIT_CARD",
+         credit_card: {
+         expiration_month: payment[:expiration_month],
+         expiration_year: payment[:expiration_year],
+         number: payment[:card_number],
+         cvc: payment[:cvc],
+           holder: {
+             fullname: payment[:holder_name],
+             birthdate: payment[:holder_birthdate],
+             tax_document: {
+               type: "CPF",
+               number: payment[:cpf]
+             },
+              phone: {
+                country_code: "55",
+                area_code: "11",
+                number: payment[:phone]
+              }
+            }
+          }
+        }
+      }
+
+      @api.payment.create(order.external_id, credit_card_payment)
   end
 end
