@@ -46,9 +46,9 @@
       <%= f.label "Parcelas (Max 12)", class: "text-subhead" %>
       <%= f.number_field :instalment_count %>
     </div>
-
+    <%= hidden_field_tag "payment[order]", "#{@order.id}" %>
     <div class="actions">
-      <%= f.submit 'Salvar', class: 'raised-button ink', name: "order", value: @order.id %>
+      <%= f.submit 'Salvar', class: 'raised-button ink' %>
     </div>
   <% end %>
 </div>

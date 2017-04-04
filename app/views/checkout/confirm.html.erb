@@ -1,2 +1,17 @@
-<h1>Checkout#confirm</h1>
-<p>Find me in app/views/checkout/confirm.html.erb</p>
+<div class="row">
+  <div class="columns card">
+    <h1 class="text-display-1">Confirmação de Pagamento</h1>
+    <div class="row columns">
+      <div class="medium-6">
+        <ul class="no-bullet">
+          <% @product.each do |item| %>
+          <li><%= item.product_name %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="medium-6">
+        <%= @custome.fullname %>
+      </div>
+    </div>
+  </div>
+</div>

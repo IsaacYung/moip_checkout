@@ -42,22 +42,33 @@ class CheckoutController < ApplicationController
   end
 
   def payment_new
-    order = Order.find(params[:order])
-    payment = Payment.where(order_id: params[:order])
+    order = Order.find(payment_params[:order])
+    payment = Payment.where(order_id: payment_params[:order])
 
     payment.update(instalment_count: payment_params[:instalment_count], funding_instrument: "CREDIT_CARD")
 
     checkout = Checkout.new
     payment_response = checkout.create_payment(order, payment_params)
 
-    payment.update(external_id: payment_response.id, status: payment_response.status)
+    if payment.update(external_id: payment_response.id, status: payment_response.status)
+      redirect_to :controller=>'checkout',:action=>'confirm', order: order.id
+    end
   end
 
   def confirm
+    order = Order.find(params[:order])
+
+    product_ids ||= []
+    order.product_movements.each do |order|
+      product_ids << order.product_id
+    end
+
+    @customer = Customer.find(order.customer_id)
+    @product = Product.find(product_ids)
   end
 
   def payment_params
-    params.require(:payment).permit(:card_number, :holder_name, :cvc, :expiration_month, :expiration_year, :holder_birthdate, :cpf, :phone, :instalment_count, :order_id)
+    params.require(:payment).permit(:card_number, :holder_name, :cvc, :expiration_month, :expiration_year, :holder_birthdate, :cpf, :phone, :instalment_count, :order)
   end
 
   def customer_params
