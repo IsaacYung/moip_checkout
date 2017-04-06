@@ -1,8 +1,11 @@
-// Place all the styles related to the checkout controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "foundation_and_overrides";
+
 .products ul li span {
   display: block;
   font-weight: bold;
   font-size: 1rem;
+}
+
+.confirm .card {
+  padding: $global-padding * 2 $global-padding;
 }

@@ -1,6 +1,6 @@
 
 <div class="columns end">
-  <%= form_for :payment do |f| %>
+  <%= form_for :payment, url: create_checkout_payment_path do |f| %>
     <div class="field">
       <%= f.label "Número do Cartão", class: "text-subhead" %>
       <%= f.number_field :card_number %>

@@ -30,7 +30,7 @@ class CheckoutController < ApplicationController
     order.update(external_id: order_response.id)
     customer.update(external_id: order_response.customer.id)
 
-    redirect_to :controller=>'checkout',:action=>'payment', order: order.id
+    redirect_to checkout_payment_path(order.id)
   end
 
   def payment
@@ -43,7 +43,7 @@ class CheckoutController < ApplicationController
 
   def payment_new
     order = Order.find(payment_params[:order])
-    payment = Payment.where(order_id: payment_params[:order])
+    payment = Payment.where(order_id: payment_params[:order]).first
 
     payment.update(instalment_count: payment_params[:instalment_count], funding_instrument: "CREDIT_CARD")
 
@@ -51,18 +51,19 @@ class CheckoutController < ApplicationController
     payment_response = checkout.create_payment(order, payment_params)
 
     if payment.update(external_id: payment_response.id, status: payment_response.status)
-      redirect_to :controller=>'checkout',:action=>'confirm', order: order.id
+      redirect_to checkout_confirm_path(payment.id)
     end
   end
 
   def confirm
-    order = Order.find(params[:order])
+    @payment = Payment.find(params[:payment_id])
+    order = Order.find(@payment.order_id)
 
     product_ids ||= []
     order.product_movements.each do |order|
       product_ids << order.product_id
     end
-
+    @order = order
     @customer = Customer.find(order.customer_id)
     @product = Product.find(product_ids)
   end
