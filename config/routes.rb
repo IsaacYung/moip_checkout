@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get 'checkout/confirm/:payment_id', to: 'checkout#confirm', as: :checkout_confirm
 
-  post 'checkout/confirm/:payment_id/status', to: 'checkout#update_confirm', as: :update_checkout_confirm
+  post 'checkout/confirm/nofifications', to: 'checkout#update_confirm', as: :update_checkout_confirm
 
   root to: "catalog#index"
 

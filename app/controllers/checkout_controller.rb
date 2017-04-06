@@ -68,6 +68,16 @@ class CheckoutController < ApplicationController
     @product = Product.find(product_ids)
   end
 
+  def update_confirm
+    resources = params[:resource];
+
+    if resources[:payment][:id]
+      payment = Payment.where(external_id: resources[:payment][:id])
+    end
+
+    payment.update(status: resources[:payment][:status])
+  end
+
   def payment_params
     params.require(:payment).permit(:card_number, :holder_name, :cvc, :expiration_month, :expiration_year, :holder_birthdate, :cpf, :phone, :instalment_count, :order)
   end

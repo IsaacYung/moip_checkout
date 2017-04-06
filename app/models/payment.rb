@@ -4,6 +4,8 @@ class Payment < ApplicationRecord
   STATUS = {
     'IN_ANALYSIS' => 'Em análise',
     'AUTHORIZED' => 'Autorizado',
-    'CANCELLED' => 'Cancelado'
+    'CANCELLED' => 'Cancelado',
+    'PRE_AUTHORIZED' => 'Pré Autorizado',
+    'WAITING' => 'Aguardando'
   }
 end
