@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'checkout/customer'
-  post 'checkout/customer', to: 'checkout#customer_new'
+  post 'checkout/customer', to: 'checkout#customer_new', as: :new_checkout_customer
 
   get 'checkout/payment/:order', to: 'checkout#payment', as: :checkout_payment
   post 'checkout/payment', to: 'checkout#payment_new', as: :create_checkout_payment

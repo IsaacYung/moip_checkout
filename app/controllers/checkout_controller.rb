@@ -7,6 +7,7 @@ class CheckoutController < ApplicationController
       product_ids << item['product_id']
     end
 
+    @coupons = Coupon.all
     @products = Product.find(product_ids)
   end
 
@@ -19,17 +20,25 @@ class CheckoutController < ApplicationController
 
     order = customer.orders.create()
 
+    total_price = 0
     product_movements.each do |item|
       product = Product.find(item['product_id'])
       order.product_movements.create(product_id: item['product_id'], quantity: item['quantity'], status: "SUSPENDED")
       product.update(quantity: product.quantity - item['quantity'])
+      total_price += product.price
+    end
+
+    if params[:coupon]
+      coupon = Coupon.where(code: params[:coupon]).first
+      total_discount = total_price*(coupon.discount.to_f/100)
+      total_discount = total_discount.to_i
     end
 
     checkout = Checkout.new
-    order_response = checkout.create_order(order, customer)
+    order_response = checkout.create_order(order, customer, total_discount, total_price)
     order.update(external_id: order_response.id)
     customer.update(external_id: order_response.customer.id)
-
+    
     redirect_to checkout_payment_path(order.id)
   end
 

@@ -15,7 +15,7 @@ class Checkout
     @api = Moip2::Api.new(client)
   end
 
-  def create_order(order, customer)
+  def create_order(order, customer, total_discount, total)
     item_ids ||= []
     order.product_movements.each do |item|
       item_ids << item.product_id;
@@ -35,6 +35,11 @@ class Checkout
 
     order_json = {
       own_id: order.id,
+      amount: {
+        subtotals: {
+          discount: total_discount
+        }
+      },
       items: items,
       customer: {
         own_id: customer.id,
