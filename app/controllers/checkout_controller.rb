@@ -28,8 +28,7 @@ class CheckoutController < ApplicationController
       total_price += product.price
     end
 
-    if params[:coupon]
-      coupon = Coupon.where(code: params[:coupon]).first
+    if coupon = Coupon.where(code: params[:coupon]).first
       total_discount = total_price*(coupon.discount.to_f/100)
       total_discount = total_discount.to_i
     end

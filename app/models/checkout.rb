@@ -10,7 +10,7 @@ class Checkout
       target: "https://91ecb14b.ngrok.io/checkout/confirm/status",
       media: "WEBHOOK"
     }
-    auth = Moip2::Auth::Basic.new("G3B6XAH0KBCAMEE0O1LZALCB786FNHQ5", "W8EBLTSUWA6BENQO68YN3A9KAQ2PJERATS0GNLYY")
+    auth = Moip2::Auth::Basic.new(ENV['MOIP_TOKEN'], ENV['MOIP_SECRET'])
     client = Moip2::Client.new(:sandbox, auth)
     @api = Moip2::Api.new(client)
   end
