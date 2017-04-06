@@ -71,6 +71,7 @@ class CheckoutController < ApplicationController
     order.product_movements.each do |order|
       product_ids << order.product_id
     end
+    
     @order = order
     @customer = Customer.find(order.customer_id)
     @product = Product.find(product_ids)

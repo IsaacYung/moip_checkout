@@ -1,4 +1,4 @@
-<div class="row columns card">
+<div class="row columns card payment">
   <div class="columns text-headline">ID <%= @order_response.id %></div>
   <div class="medium-6 columns end">
     <h3 class="text-center">Pagamento</h3>
@@ -21,7 +21,7 @@
           <div class="columns">
             <ul class="no-bullet inline-list row">
               <li class="medium-9 columns"><span><%= item.product %></span></li>
-              <li class="medium-3 columns"><span>R$ <%= BRL item.price %></span></li>
+              <li class="medium-3 columns"><span>R$ <span><%= BRL item.price %></span></span></li>
             </ul>
           </div>
         </div>
@@ -34,7 +34,7 @@
           <div class="columns">
             <ul class="no-bullet inline-list row">
               <li class="medium-9 columns"><span>Adicional</span></li>
-              <li class="medium-3 columns"><span>R$ <%= BRL @order_response.amount.subtotals.addition %></span></li>
+              <li class="medium-3 columns"><span>R$ <span data-initial="<%= @order_response.amount.subtotals.addition %>" id="addition"><%= BRL @order_response.amount.subtotals.addition %></span></span></li>
             </ul>
           </div>
         </div>
@@ -57,7 +57,7 @@
           <div class="columns">
             <ul class="no-bullet inline-list row">
               <li class="medium-9 columns"><span>Total</span></li>
-              <li class="medium-3 columns"><span>R$ <%= BRL @order_response.amount.total %></span></li>
+              <li class="medium-3 columns"><span>R$ <span data-initial="<%= @order_response.amount.total %>" id="total"><%= BRL @order_response.amount.total %></span></span></li>
             </ul>
           </div>
         </div>
