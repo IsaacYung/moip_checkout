@@ -38,7 +38,7 @@ class CheckoutController < ApplicationController
     order_response = checkout.create_order(order, customer, total_discount, total_price)
     order.update(external_id: order_response.id)
     customer.update(external_id: order_response.customer.id)
-    
+
     redirect_to checkout_payment_path(order.id)
   end
 
