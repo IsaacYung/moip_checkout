@@ -21,7 +21,7 @@
   <div class="">
     <%= form_for :cart do |f| %>
       <%= f.hidden_field :products %><br />
-      <%= f.submit 'Finalizar Compra', class: 'raised-accent-button ink buy-finalize' %>
+      <%= f.submit 'Finalizar Compra', class: 'raised-accent-button ink buy-finalize', disabled: true %>
     <% end %>
   </div>
 </div>

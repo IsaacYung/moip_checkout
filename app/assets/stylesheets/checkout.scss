@@ -1,9 +1,15 @@
 @import "foundation_and_overrides";
 
-.products ul li span {
-  display: block;
-  font-weight: bold;
-  font-size: 1rem;
+.products {
+  ul li span {
+    display: block;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .coupon {
+    background-color: lighten(gray, 30%);
+  }
 }
 
 .confirm .card {
