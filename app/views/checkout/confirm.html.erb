@@ -1,2 +1,44 @@
-<h1>Checkout#confirm</h1>
-<p>Find me in app/views/checkout/confirm.html.erb</p>
+<% title 'Confirmação de Pagamento' %>
+<div class="row confirm">
+  <div class="columns card">
+    <h1 class="text-display-1">Confirmação de Pagamento</h1>
+    <div class="row">
+      <div class="medium-6 columns">
+        <div class="">
+          <span class="text-title"><%= @customer.fullname %></span>
+          <ul class="no-bullet">
+            <li><%= @payment.external_id %></li>
+            <% @product.each do |item| %>
+            <li><%= item.product_name %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="medium-6 columns">
+        <div class="text-right">
+          <span class="text-display-1">R$ <%= BRL @payment.amount['total'] %></span>
+        </div>
+      </div>
+    </div>
+    <div class="row columns">
+      <span class="text-subhead">Status do pagamento: <strong id="status"><%= Payment::STATUS[@payment.status] %></strong></span>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  (function() {
+      var count = 15,
+          status = $('#status').text();
+
+      setInterval(function() {
+          if (status == 'Autorizado'){
+            return
+          }
+        
+          count -= 1;
+          if (count == 0) {
+            location.reload();
+          }
+      }, 1000);
+  })();
+</script>

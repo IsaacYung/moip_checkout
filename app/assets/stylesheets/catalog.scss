@@ -5,9 +5,24 @@
 }
 
 .catalog {
-  .card {
+  .buy-finalize {
+    position: absolute;
+    right: 1rem;
+    top: 4rem;
+  }
+
+  .product {
     margin: $global-margin * 0.5;
     cursor: pointer;
+    height: 13rem;
+
+    img {
+      margin: 0
+    }
+
+    .image {
+      margin-top: 4rem;
+    }
   }
 
   .active {

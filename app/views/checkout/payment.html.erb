@@ -1,2 +1,67 @@
-<h1>Checkout#payment</h1>
-<p>Find me in app/views/checkout/payment.html.erb</p>
+<% title 'Pagamento' %>
+<div class="row columns card payment">
+  <div class="medium-6 columns end">
+    <h3 class="text-center">Pagamento</h3>
+    <div class="customer columns">
+      <ul class="no-bullet">
+        <li class="text-title text-center"><%= @order_response.customer.fullname %></li>
+        <li class="text-subhead text-center"><%= @order_response.customer.email %></li>
+      </ul>
+    </div>
+    <div class="credit_card columns">
+      <%= render 'form_card' %>
+    </div>
+  </div>
+  <div class="columns medium-6 end">
+    <h3 class="text-center">Produtos</h3>
+    <hr>
+    <% @order_response.items.each do |item| %>
+      <div class="columns end">
+        <div class="row">
+          <div class="columns">
+            <ul class="no-bullet inline-list row">
+              <li class="medium-9 columns"><span><%= item.product %></span></li>
+              <li class="medium-3 columns"><span>R$ <span><%= BRL item.price %></span></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr>
+    <% end %>
+      <hr>
+      <div class="columns end">
+        <div class="row">
+          <div class="columns">
+            <ul class="no-bullet inline-list row">
+              <li class="medium-9 columns"><span>Adicional</span></li>
+              <li class="medium-3 columns"><span>R$ <span data-initial="<%= @order_response.amount.subtotals.addition %>" id="addition"><%= BRL @order_response.amount.subtotals.addition %></span></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="columns end">
+        <div class="row">
+          <div class="columns">
+            <ul class="no-bullet inline-list row">
+              <li class="medium-9 columns"><span>Desconto</span></li>
+              <li class="medium-3 columns"><span>R$ <%= BRL @order_response.amount.subtotals.discount %></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <hr>
+      <div class="columns end">
+        <div class="row">
+          <div class="columns">
+            <ul class="no-bullet inline-list row">
+              <li class="medium-9 columns"><span>Total</span></li>
+              <li class="medium-3 columns"><span>R$ <span data-initial="<%= @order_response.amount.total %>" id="total"><%= BRL @order_response.amount.total %></span></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr>
+  </div>
+</div>

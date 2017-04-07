@@ -1,0 +1,35 @@
+
+<div class="columns medium-6 card end">
+  <%= form_for :customer do |f| %>
+    <div class="field">
+      <%= f.label "Nome Completo", class: "text-subhead" %>
+      <%= f.text_field :fullname %>
+    </div>
+
+    <div class="field">
+      <%= f.label "E-mail", class: "text-subhead" %>
+      <%= f.text_field :email %>
+    </div>
+
+    <div class="row">
+      <div class="field medium-6 columns">
+        <%= f.label "Telefone", class: "text-subhead" %>
+        <%= f.text_field :phone, maxlength: 11 %>
+      </div>
+
+      <div class="field medium-6 columns">
+        <%= f.label "CPF", class: "text-subhead" %>
+        <%= f.text_field :tax_document, maxlength: 11 %>
+      </div>
+    </div>
+
+    <div class="field date">
+      <%= f.label "Nascimento", class: "text-subhead" %>
+      <%= f.date_select :birth_date, :start_year => Date.current.year - 14, :end_year => 1920, order: [:day, :month, :year] %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Cadastrar', class: 'raised-button ink' %>
+    </div>
+  <% end %>
+</div>

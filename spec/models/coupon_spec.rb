@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe "checkout/customer.html.erb", type: :view do
+RSpec.describe Coupon, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

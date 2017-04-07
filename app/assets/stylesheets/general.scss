@@ -1,0 +1,17 @@
+@import "foundation_and_overrides";
+
+strong {
+  font-weight: bold !important;
+}
+
+footer {
+  margin-top: $global-margin !important;
+}
+
+header {
+  margin-bottom: $global-margin !important;
+}
+
+label {
+  font-weight: bold !important;
+}

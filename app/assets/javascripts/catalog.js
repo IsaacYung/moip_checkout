@@ -2,17 +2,17 @@
   'use strict'
 
   $.fn.catalog = function() {
-    var card = this.find('.card'),
+    var product = this.find('.product'),
         cart = this.find('.cart'),
         item = this.find('#product-card'),
         cartForm = this.find('#cart_products'),
+        finalizeButton = this.find('.buy-finalize'),
         products = [],
         currentItens;
 
-
-
-    card.on('click', function(event){
+    product.on('click', function(event){
       $(event.currentTarget).addClass('active');
+      finalizeButton.attr('disabled', false);
       currentItens = item.html();
       currentItens++;
       item.html(currentItens);
@@ -21,7 +21,6 @@
         product_id: $(event.currentTarget).data('product-id'),
         quantity: 1
       });
-
 
       cartForm.val(JSON.stringify(products));
     });

@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe CheckoutController, type: :controller do
 
-  describe "GET #custumer" do
+  describe "GET #customer" do
     it "returns http success" do
-      get :custumer
+      get :customer
       expect(response).to have_http_status(:success)
     end
   end
