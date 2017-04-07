@@ -21,7 +21,24 @@
       </div>
     </div>
     <div class="row columns">
-      <span class="text-subhead">Status do pagamento: <strong><%= Payment::STATUS[@payment.status] %></strong></span>
+      <span class="text-subhead">Status do pagamento: <strong id="status"><%= Payment::STATUS[@payment.status] %></strong></span>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  (function() {
+      var count = 15,
+          status = $('#status').text();
+
+      setInterval(function() {
+          if (status == 'Autorizado'){
+            return
+          }
+        
+          count -= 1;
+          if (count == 0) {
+            location.reload();
+          }
+      }, 1000);
+  })();
+</script>

@@ -58,7 +58,7 @@ class Checkout
          cvc: payment[:cvc],
            holder: {
              fullname: payment[:holder_name],
-             birthdate: payment[:holder_birthdate],
+             birthdate: "#{payment['holder_birthdate(1i)']}-#{payment['holder_birthdate(2i)']}-#{payment['holder_birthdate(3i)']}",
              tax_document: {
                type: "CPF",
                number: payment[:cpf]

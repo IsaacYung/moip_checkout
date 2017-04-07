@@ -19,11 +19,7 @@
             <li class="menu-text text-title" role="menuitem">Teste Moip</li>
           </ul>
         </div>
-        <div class="top-bar-right no-collapse">
-          <ul class="menu">
-            <li><a class="text-subhead cart" href="#">Produtos(<span id="product-card">0</span>) no carrinho</a></li>
-          </ul>
-        </div>
+        <%= render 'catalog/cart' if current_page?(root_url) %>
       </div>
     </header>
     <div class="row">
@@ -31,6 +27,7 @@
     </div>
     <footer class="callout">
       <div class="text-center text-subhead">
+        Preencher todos os campos - os formulários não possuem validação inline<br>
         Isaac Yung Lopes
       </div>
     </footer>

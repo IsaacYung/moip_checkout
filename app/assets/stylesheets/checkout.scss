@@ -9,3 +9,7 @@
 .confirm .card {
   padding: $global-padding * 2 $global-padding;
 }
+
+.date select {
+  @extend .medium-4, .columns;
+}

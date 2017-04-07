@@ -1,24 +1,26 @@
 
-<div class="columns end">
+<div class="row columns end">
   <%= form_for :payment, url: create_checkout_payment_path do |f| %>
     <div class="field">
       <%= f.label "Número do Cartão", class: "text-subhead" %>
-      <%= f.number_field :card_number %>
+      <%= f.text_field :card_number, maxlength: 16 %>
     </div>
 
-    <div class="field">
-      <%= f.label "Mês", class: "text-subhead" %>
-      <%= f.number_field :expiration_month %>
-    </div>
+    <div class="row">
+      <div class="field columns medium-4">
+        <%= f.label "Mês", class: "text-subhead" %>
+        <%= f.text_field :expiration_month, maxlength: 2 %>
+      </div>
 
-    <div class="field">
-      <%= f.label "Ano", class: "text-subhead" %>
-      <%= f.number_field :expiration_year %>
-    </div>
+      <div class="field columns medium-4">
+        <%= f.label "Ano", class: "text-subhead" %>
+        <%= f.text_field :expiration_year, maxlength: 2 %>
+      </div>
 
-    <div class="field">
-      <%= f.label "CVC", class: "text-subhead" %>
-      <%= f.text_field :cvc %>
+      <div class="field columns medium-4">
+        <%= f.label "CVC", class: "text-subhead" %>
+        <%= f.text_field :cvc, maxlength: 3 %>
+      </div>
     </div>
 
     <div class="field">
@@ -26,24 +28,26 @@
       <%= f.text_field :holder_name %>
     </div>
 
-    <div class="field">
+    <div class="field date">
       <%= f.label "Nascimento", class: "text-subhead" %>
-      <%= f.text_field :holder_birthdate %>
+      <%= f.date_select :holder_birthdate, start_year: Date.current.year - 18, end_year: 1920, order: [:day, :month, :year] %>
     </div>
 
     <div class="field">
       <%= f.label "CPF", class: "text-subhead" %>
-      <%= f.text_field :cpf %>
+      <%= f.text_field :cpf, maxlength: 11 %>
     </div>
 
-    <div class="field">
-      <%= f.label "Telefone", class: "text-subhead" %>
-      <%= f.text_field :phone %>
-    </div>
+    <div class="row">
+      <div class="field medium-6 columns">
+        <%= f.label "Telefone", class: "text-subhead" %>
+        <%= f.text_field :phone, maxlength: 11 %>
+      </div>
 
-    <div class="field">
-      <%= f.label "Parcelas", class: "text-subhead" %>
-      <%= f.select :instalment_count, Payment::INSTALMENTS %>
+      <div class="field medium-6 columns">
+        <%= f.label "Parcelas", class: "text-subhead" %>
+        <%= f.select :instalment_count, Payment::INSTALMENTS %>
+      </div>
     </div>
     <%= hidden_field_tag "payment[order]", "#{@order.id}" %>
     <div class="actions">

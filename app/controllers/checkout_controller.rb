@@ -53,7 +53,8 @@ class CheckoutController < ApplicationController
     payment = Payment.where(order_id: payment_params[:order]).first
     customer = Customer.find(order.customer_id)
 
-    payment.update(instalment_count: payment_params[:instalment_count], funding_instrument: "CREDIT_CARD")
+    payment.instalment_count = payment_params[:instalment_count]
+    payment.funding_instrument = "CREDIT_CARD"
 
     checkout = Checkout.new
 
