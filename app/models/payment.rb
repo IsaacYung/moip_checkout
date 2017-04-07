@@ -9,6 +9,8 @@ class Payment < ApplicationRecord
     'WAITING' => 'Aguardando'
   }
 
+  INSTALMENT_TAX = 0.025
+
   INSTALMENTS = {
     '1x Sem juros' => 1,
     '2x'  => 2,

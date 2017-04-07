@@ -6,7 +6,7 @@
         <div class="">
           <span class="text-title"><%= @customer.fullname %></span>
           <ul class="no-bullet">
-            <li><%= @order.external_id %></li>
+            <li><%= @payment.external_id %></li>
             <% @product.each do |item| %>
             <li><%= item.product_name %></li>
             <% end %>

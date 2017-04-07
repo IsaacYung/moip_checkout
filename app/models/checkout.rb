@@ -1,21 +1,11 @@
 class Checkout
   def initialize
-    webhook_config = {
-      events: [
-        "ORDER.*",
-        "PAYMENT.AUTHORIZED",
-        "PAYMENT.CANCELLED",
-        "PAYMENT.IN_ANALYSIS"
-      ],
-      target: "https://91ecb14b.ngrok.io/checkout/confirm/status",
-      media: "WEBHOOK"
-    }
     auth = Moip2::Auth::Basic.new(ENV['MOIP_TOKEN'], ENV['MOIP_SECRET'])
     client = Moip2::Client.new(:sandbox, auth)
     @api = Moip2::Api.new(client)
   end
 
-  def create_order(order, customer, total_discount, total)
+  def create_order(order, customer, total_discount, total_addition = 0)
     item_ids ||= []
     order.product_movements.each do |item|
       item_ids << item.product_id;
@@ -37,7 +27,8 @@ class Checkout
       own_id: order.id,
       amount: {
         subtotals: {
-          discount: total_discount
+          discount: total_discount,
+          addition: total_addition
         }
       },
       items: items,
@@ -83,20 +74,5 @@ class Checkout
       }
 
       @api.payment.create(order.external_id, credit_card_payment)
-  end
-
-  def config_webhook(payment)
-    webhook_config = {
-      events: [
-        "ORDER.*",
-        "PAYMENT.AUTHORIZED",
-        "PAYMENT.CANCELLED",
-        "PAYMENT.IN_ANALYSIS"
-      ],
-      target: "https://91ecb14b.ngrok.io/checkout/confirm/#{payment.id}/status",
-      media: "WEBHOOK"
-    }
-
-    @api.webhooks(order.external_id, credit_card_payment)
   end
 end

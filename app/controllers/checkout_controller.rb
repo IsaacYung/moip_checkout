@@ -29,12 +29,11 @@ class CheckoutController < ApplicationController
     end
 
     if coupon = Coupon.where(code: params[:coupon]).first
-      total_discount = total_price*(coupon.discount.to_f/100)
-      total_discount = total_discount.to_i
+      total_discount = handle_value coupon.discount, total_price
     end
 
     checkout = Checkout.new
-    order_response = checkout.create_order(order, customer, total_discount, total_price)
+    order_response = checkout.create_order(order, customer, total_discount)
     order.update(external_id: order_response.id)
     customer.update(external_id: order_response.customer.id)
 
@@ -52,11 +51,22 @@ class CheckoutController < ApplicationController
   def payment_new
     order = Order.find(payment_params[:order])
     payment = Payment.where(order_id: payment_params[:order]).first
+    customer = Customer.find(order.customer_id)
 
     payment.update(instalment_count: payment_params[:instalment_count], funding_instrument: "CREDIT_CARD")
 
     checkout = Checkout.new
-    payment_response = checkout.create_payment(order, payment_params)
+
+    if payment_params[:instalment_count].to_i > 1
+      payment.amount['subtotals']['addition'] = handle_value Payment::INSTALMENT_TAX, payment.amount['total']
+      payment.amount['total'] = payment.amount['total'] + payment.amount['subtotals']['addition']
+
+      order_response = checkout.create_order(order, customer, payment.amount['subtotals']['discount'], payment.amount['subtotals']['addition'])
+      order.update(external_id: order_response.id)
+      payment_response = checkout.create_payment(order, payment_params)
+    else
+      payment_response = checkout.create_payment(order, payment_params)
+    end
 
     if payment.update(external_id: payment_response.id, status: payment_response.status)
       redirect_to checkout_confirm_path(payment.id)
@@ -71,7 +81,7 @@ class CheckoutController < ApplicationController
     order.product_movements.each do |order|
       product_ids << order.product_id
     end
-    
+
     @order = order
     @customer = Customer.find(order.customer_id)
     @product = Product.find(product_ids)
@@ -85,6 +95,10 @@ class CheckoutController < ApplicationController
     end
 
     payment.update(status: resources[:payment][:status])
+  end
+
+  def handle_value(handle, total)
+    ((handle * (total.to_f/100))*100).to_i
   end
 
   def payment_params
